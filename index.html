@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MemoriesX | Premium Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: white;
+}
+
+header {
+    text-align: center;
+    padding: 25px;
+    background: rgba(0,0,0,0.8);
+}
+
+.logo { width: 150px; }
+
+nav button {
+    margin: 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #00ffd5;
+    font-weight: bold;
+}
+
+.section { display: none; }
+.active { display: block; }
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    padding: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    transition: 0.4s;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 30px rgba(255,255,255,0.25);
+}
+
+.price {
+    color: #ff4dff;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.btn {
+    margin-top: 12px;
+    padding: 10px 18px;
+    background: linear-gradient(45deg, #25D366, #1ebe5d);
+    border-radius: 12px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: orange;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.note {
+    font-size: 12px;
+    color: lightgray;
+}
+
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: rgba(0,0,0,0.8);
+}
+
+/* SCROLL ANIMATION */
+.animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.animate.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+
+<script>
+function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function orderNow(product, price="") {
+    let message = "Hello, I want to order: " + product;
+    if(price) message += " - " + price;
+    message += "\nPlease share details.";
+    let url = "https://wa.me/9036351517?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
+}
+
+window.onload = function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.animate').forEach(el => {
+        observer.observe(el);
+    });
+}
+</script>
+
+</head>
+
+<body>
+
+<header class="animate">
+    <img src="Memoriesx – Logo.png" class="logo">
+    <h2>MemoriesX</h2>
+    <p>Scan. Watch. Cherish.</p>
+
+    <nav>
+        <button onclick="showSection('products')">Products</button>
+        <button onclick="showSection('frames')">Frames</button>
+    </nav>
+</header>
+
+<!-- PRODUCTS -->
+<div id="products" class="section active">
+    <div class="container">
+        <div class="card animate"><h3>Frames</h3><button class="btn" onclick="showSection('frames')">View</button></div>
+        <div class="card animate"><h3>Cute Frame</h3><button class="btn" onclick="orderNow('Cute Frame')">Buy</button></div>
+        <div class="card animate"><h3>Kindergarten Books</h3><button class="btn" onclick="orderNow('Kindergarten Books')">Buy</button></div>
+        <div class="card animate"><h3>Customized Books</h3><button class="btn" onclick="orderNow('Customized Books')">Buy</button></div>
+        <div class="card animate"><h3>Greeting Cards</h3><button class="btn" onclick="orderNow('Greeting Cards')">Buy</button></div>
+        <div class="card animate"><h3>Invitation Cards</h3><button class="btn" onclick="orderNow('Invitation Cards')">Buy</button></div>
+    </div>
+</div>
+
+<!-- FRAMES -->
+<div id="frames" class="section">
+    <div class="container">
+
+        <div class="card animate">
+            <h3>8x12 Frame</h3>
+            <p class="price">₹599</p>
+            <button class="btn" onclick="orderNow('8x12 Frame','₹599')">Order</button>
+        </div>
+
+        <div class="card animate">
+            <div class="badge">Best Seller</div>
+            <h3>12x18 Frame</h3>
+            <p class="price">₹899</p>
+            <button class="btn" onclick="orderNow('12x18 Frame','₹899')">Order</button>
+        </div>
+
+        <div class="card animate"><h3>12x24</h3><p class="price">₹1199</p><button class="btn" onclick="orderNow('12x24 Frame','₹1199')">Order</button></div>
+        <div class="card animate"><h3>12x30</h3><p class="price">₹1399</p><button class="btn" onclick="orderNow('12x30 Frame','₹1399')">Order</button></div>
+        <div class="card animate"><h3>12x36</h3><p class="price">₹1499</p><button class="btn" onclick="orderNow('12x36 Frame','₹1499')">Order</button></div>
+        <div class="card animate"><h3>16x24</h3><p class="price">₹2299</p><button class="btn" onclick="orderNow('16x24 Frame','₹2299')">Order</button></div>
+        <div class="card animate"><h3>20x30</h3><p class="price">₹2999</p><button class="btn" onclick="orderNow('20x30 Frame','₹2999')">Order</button></div>
+        <div class="card animate"><h3>24x36</h3><p class="price">₹3999</p><button class="btn" onclick="orderNow('24x36 Frame','₹3999')">Order</button></div>
+
+    </div>
+</div>
+
+<a class="whatsapp" href="https://wa.me/9036351517" target="_blank">💬</a>
+
+<footer class="animate">
+    © 2026 MemoriesX | All Products Available
+</footer>
+
+</body>
+</html>
